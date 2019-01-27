@@ -19,8 +19,8 @@ class Book:
     def print(self):
         print(str(self))
         
-book = Book('AAA', 'aaa', 'OOO', 1980, True, 2211006655)
-book.print()
-book1 = Book('AAA', 'ooo', 'QQQ', 1980, True, 2211006655)
-
-print(book != book1)
+#book = Book('AAA', 'aaa', 'OOO', 1980, True, 2211006655)
+#book.print()
+#book1 = Book('AAA', 'ooo', 'QQQ', 1980, True, 2211006655)
+#
+#print(book != book1)
