@@ -7,7 +7,7 @@ def Choose(opt):
     lib = Library.Library(LIBRARY_ROOT)
     
     if opt=='1':
-        list = "\n".join(getBooks())
+        list = "\n".join([str(lib.getBooks()[0])])
         print(list)
         pass
     elif opt =='2':
