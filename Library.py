@@ -31,5 +31,3 @@ class Library:
     def findBooks(self, author='', name='', publisher='', year='', cat_num='', is_available=''):
         pass
     
-lib = Library('Books/books.txt')
-print(lib.getBooks())

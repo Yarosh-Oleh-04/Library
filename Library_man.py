@@ -7,8 +7,8 @@ def Choose(opt):
     lib = Library.Library(LIBRARY_ROOT)
     
     if opt=='1':
-        list = "\n".join(getBooks())
-        print(list)
+        list = lib.getBooks()
+        for i in list: print(i)
         pass
     elif opt =='2':
         print("Enter book name:")
@@ -35,8 +35,10 @@ def Choose(opt):
         print("No such option available.")
     pass
 
+print("Welcome to the library!")
+
 while True:
-    print("Welcome to the library!/n Choose an option:")
+    print("\nChoose an option:")
     print("""
 1. Show all books
 2. Look for a book
