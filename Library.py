@@ -21,7 +21,7 @@ class Library:
     
     def hasBook(self, book):
         for i in self.books:
-            if i == book:
+            if i.name == book.name and i.author == book.author:
                 return True
         return False
     
@@ -31,3 +31,7 @@ class Library:
     def findBooks(self, author='', name='', publisher='', year='', cat_num='', is_available=''):
         pass
     
+LIBRARY_ROOT="Books/books.txt"
+lib = Library(LIBRARY_ROOT)
+lib.getBooks()
+print(str(lib.hasBook(Book.Book('Цифрова фортеця','Ден Браун','','','',''))))

@@ -13,8 +13,8 @@ def Choose(opt):
     elif opt =='2':
         print("Enter book name:")
         name = input('=>')
-        book = name.split(',')
-        if lib.hasBook(Book(book[0], book[1], '', 0, True, 111)):
+        book = name.split(', ')
+        if lib.hasBook(Book.Book(book[0], book[1], '', '', '', '')):
             print("A book found:")
             
             books = lib.findBooks(name=book[0], author=book[1])
