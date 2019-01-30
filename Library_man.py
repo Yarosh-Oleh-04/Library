@@ -5,21 +5,21 @@ LIBRARY_ROOT="Books/books.txt"
 
 def Choose(opt):
     lib = Library.Library(LIBRARY_ROOT)
+    list = lib.getBooks()
     
     if opt=='1':
-        list = lib.getBooks()
         for i in list: print(i)
-        pass
     elif opt =='2':
         print("Enter book name:")
         name = input('=>')
-        book = name.split(', ')
-        if lib.hasBook(Book.Book(book[0], book[1], '', '', '', '')):
+        if lib.hasBook(Book.Book(name, '', '', '', '', '')):
             print("A book found:")
             
-            books = lib.findBooks(name=book[0], author=book[1])
-            for b in books:
-                b.print()
+            books = lib.findBooks(name=name)
+            
+            if(books is not None and books.any()):
+               for b in books:
+                   b.print()
         else:
             print("No match found.")
         

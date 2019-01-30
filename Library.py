@@ -21,7 +21,7 @@ class Library:
     
     def hasBook(self, book):
         for i in self.books:
-            if i.name == book.name and i.author == book.author:
+            if i.name == book.name:
                 return True
         return False
     
