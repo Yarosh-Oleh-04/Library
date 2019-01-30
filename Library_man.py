@@ -5,7 +5,7 @@ LIBRARY_ROOT="Books/books.txt"
 
 def printBooks(books):
     ln = len(books)
-    for i in range(ln): print(i, books[i], sep=': ')
+    for i in range(ln): print(i + 1, books[i], sep=': ')
     
 def lookForABook(lib):
     print("Enter book name:")
@@ -13,7 +13,7 @@ def lookForABook(lib):
     
     foundBooks = lib.findBooks(name=name)
     
-    if(foundBooks is not None and foundBooks.any()):
+    if foundBooks != []:
        print("Books found:")
        printBooks(foundBooks)
     else:
