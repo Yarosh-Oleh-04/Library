@@ -30,17 +30,8 @@ class Library:
         pass
 
     def findBooks(self, name='', author='', publisher='', year='', cut_num='', is_available=''):
-        similar = []
-        n = 0
-        for i in self.books:
-            if name == '' or i.name == name: n += 1
-            if author == '' or i.author == author: n += 1
-            if publisher == '' or i.publisher == publisher: n += 1
-            if year == '' or i.year == year: n += 1
-            if cut_num == '' or i.cut_num == cut_num: n += 1
-            if is_available == '' or i.is_available == is_available: n += 1
-            if n == 6: similar += [i]
-            n = 0
+        similar = list(filter(lambda book: book.name == name or book.author == author or book.publisher == publisher or book.year == year
+                            or book.cut_num == cut_num or book.is_available == is_available, self.books))
         return similar
 
 # LIBRARY_ROOT="Books/books.txt"
