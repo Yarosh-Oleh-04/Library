@@ -18,7 +18,8 @@ class Library:
         pass
 
     def addBook(self, book):
-        pass
+        book = ','.join(book)
+        open(self.root, 'a').write('\n' + book)
 
     def hasBook(self, book):
         for i in self.books:

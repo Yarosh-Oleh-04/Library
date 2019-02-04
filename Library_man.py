@@ -18,8 +18,7 @@ def lookForABook(lib):
         printBooks(foundBooks)
     else:
         print("No match found.")
-
-    return foundBooks
+        return foundBooks
 
 
 def borrowABook(books):
@@ -47,18 +46,48 @@ def Choose(option):
         lookForABook(lib)
 
     elif option == '3':
+        new_book = []
+        new_book += [input('Name => ')]
+        new_book += [input('Author => ')]
+        new_book += [input('Publisher => ')]
+        new_book += [input('Year => ')]
+        new_book += ['true']
+        new_book += [input('Catalog number => ')]
+        lib.addBook(new_book)
+        print('Succed!')
+
+    elif option == '4':
         while foundBooks is None or len(foundBooks) <= 0:
             foundBooks = lookForABook(lib)
 
         borrowABook(foundBooks)
 
-    elif option == '4':
-        pass
-
     elif option == '5':
         pass
 
     elif option == '6':
+        print("""
+Search by:
+1. name
+2. author
+3. publisher
+4. year
+        """)
+        by = input('=>')
+        what = input('=>')
+        name = what if by == '1' else ''
+        author = what if by == '2' else ''
+        publisher = what if by == '3' else ''
+        year = what if by == '4' else ''
+        foundBooks = lib.findBooks(name=name, author=author, publisher=publisher, year=year)
+
+        if foundBooks:
+            print("Books found:")
+            printBooks(foundBooks)
+        else:
+            print("No match found.")
+
+    elif option == '7':
         lib.storeBooks()
         print("Thanks for using our services. Good bye!")
         exit()
@@ -74,10 +103,11 @@ while True:
     print("""
 1. Show all books
 2. Look for a book
-3. Borrow a book
-4. Return a book
-5. Search by parameters
-6. Exit
+3. Add book
+4. Borrow a book
+5. Return a book
+6. Search by parameters
+7. Exit
 """)
 
     opt = input("=>")
