@@ -28,11 +28,18 @@ class Library:
         return False
 
     def borrowBook(self, book):
-        pass
+        books = open(self.root, 'r').readlines()
+        for i in range(len(books)):
+            if book.split(',')[0] == books[i].split(',')[0]:
+                books[i] = books[i].split(',')
+                books[i][4] = 'false'
+                books[i] = ','.join(books[i])
+        open(self.root, 'w').write(''.join(books))
 
     def findBooks(self, name='', author='', publisher='', year='', cut_num='', is_available=''):
-        similar = list(filter(lambda book: book.name == name or book.author == author or book.publisher == publisher or book.year == year
-                            or book.cut_num == cut_num or book.is_available == is_available, self.books))
+        similar = list(filter(
+            lambda book: book.name == name or book.author == author or book.publisher == publisher or book.year == year
+                         or book.cut_num == cut_num or book.is_available == is_available, self.books))
         return similar
 
 # LIBRARY_ROOT="Books/books.txt"

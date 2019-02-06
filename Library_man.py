@@ -2,7 +2,9 @@ import Library
 
 LIBRARY_ROOT = "Books/books.txt"
 
+
 def printBooks(books):
+    print('0. Borrow book\n')
     ln = len(books)
     for i in range(ln): print(i + 1, books[i], sep=': ')
 
@@ -11,39 +13,39 @@ def lookForABook(lib):
     print("Enter book name:")
     name = input('=>')
 
-    foundBooks = lib.findBooks(name=name)
+    found_books = lib.findBooks(name=name)
 
-    if foundBooks:
+    if found_books:
         print("Books found:")
-        printBooks(foundBooks)
+        printBooks(found_books)
     else:
         print("No match found.")
-        return foundBooks
+    return found_books
 
 
-def borrowABook(books):
+def borrowABook(books, lib):
     print('Choose a book to borrow:')
-    num = int(input("=>"))
+    num = int(input("=>")) - 1
+    if str(books[num]).split(',')[4] == ' \nAvailable: false ':
+        print('This book is not available')
+        return 0
+    book = str(books[num]).split('\n')[0]
+    lib.borrowBook(book)
+    print("Book: " + book + "borrowed!")
 
-    book = books[num]
-    book.isAvailable = False
 
-    print("Book" + str(book) + " borrowed!")
-
-
-def Choose(option):
+def Choose(option, found_books):
     lib = Library.Library(LIBRARY_ROOT)
     libBooks = lib.getBooks()
-    foundBooks = []
 
     # print all
     if option == '1':
-        foundBooks = libBooks.copy()
-        printBooks(foundBooks)
+        found_books = libBooks.copy()
+        printBooks(found_books)
 
     # look for a book
     elif option == '2':
-        lookForABook(lib)
+        found_books = lookForABook(lib)
 
     elif option == '3':
         new_book = []
@@ -56,16 +58,13 @@ def Choose(option):
         lib.addBook(new_book)
         print('Succed!')
 
+    elif option == '0':
+        borrowABook(found_books, lib)
+
     elif option == '4':
-        while foundBooks is None or len(foundBooks) <= 0:
-            foundBooks = lookForABook(lib)
-
-        borrowABook(foundBooks)
-
-    elif option == '5':
         pass
 
-    elif option == '6':
+    elif option == '5':
         print("""
 Search by:
 1. name
@@ -79,15 +78,15 @@ Search by:
         author = what if by == '2' else ''
         publisher = what if by == '3' else ''
         year = what if by == '4' else ''
-        foundBooks = lib.findBooks(name=name, author=author, publisher=publisher, year=year)
+        found_books = lib.findBooks(name=name, author=author, publisher=publisher, year=year)
 
-        if foundBooks:
+        if found_books:
             print("Books found:")
-            printBooks(foundBooks)
+            printBooks(found_books)
         else:
             print("No match found.")
 
-    elif option == '7':
+    elif option == '6':
         lib.storeBooks()
         print("Thanks for using our services. Good bye!")
         exit()
@@ -95,8 +94,12 @@ Search by:
         print("No such option available.")
     pass
 
+    return found_books
+
 
 print("Welcome to the library!")
+
+foundBooks = []
 
 while True:
     print("\nChoose an option:")
@@ -104,11 +107,11 @@ while True:
 1. Show all books
 2. Look for a book
 3. Add book
-4. Borrow a book
-5. Return a book
-6. Search by parameters
-7. Exit
+4. Return a book
+5. Search by parameters
+6. Exit
 """)
 
     opt = input("=>")
-    Choose(opt)
+
+    foundBooks = Choose(opt, foundBooks)
